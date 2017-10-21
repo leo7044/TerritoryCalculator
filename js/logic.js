@@ -122,23 +122,31 @@ function updateUI()
 function scanAllFieldsAsMatrix()
 {
     var arrayFields = new Array();
-    /*for (var y = 0; y < 7; y++)
+    for (var y = 0; y < 7; y++)
     {
+        var arrayX = new Array();
         for (var x = 0; x < 7; x++)
         {
-            console.log();
+            var arrayField = new Array();
+            if ($('#field' + y + x + 'BaseLevel')[0])
+            {
+                arrayField[0] = $('#field' + y + x + 'BaseLevel')[0].innerHTML;
+                arrayField[1] = $('#field' + y + x  + 'Alliance')[0].innerHTML.replace('&nbsp;', ' ');
+            }
+            arrayX.push(arrayField);
         }
-    }*/
-    for (var i = 0; i < $('.field').length; i++)
+        arrayFields.push(arrayX);
+    }
+    /*for (var i = 0; i < $('.field').length; i++)
     {
         var arrayField = new Array();
         if ($('.field')[i].innerHTML != '')
         {
             var iInc = parseInt(i) + 1;
-            arrayField[0] = $('#field' + iInc  + 'BaseLevel')[0].innerHTML;
-            arrayField[1] = $('#field' + iInc  + 'Alliance')[0].innerHTML.replace('&nbsp;', ' ');
+            arrayField[0] = $('#field' + iInc + 'BaseLevel')[0].innerHTML;
+            arrayField[1] = $('#field' + iInc + 'Alliance')[0].innerHTML.replace('&nbsp;', ' ');
         }
         arrayFields.push(arrayField);
-    }
+    }*/
     return arrayFields;
 }
