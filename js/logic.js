@@ -115,15 +115,12 @@ function updateUI()
                 }
             }
         }
-        console.log(arrayFields);
-        console.log(arrayFieldsFull);
         for (var y in arrayFields)
         {
             for (var x in arrayFields[y])
             {
                 var field = arrayFields[y][x];
                 updateFieldColor(field, arrayFieldsFull);
-                console.log(field);
             }
         }
     }
