@@ -35,16 +35,7 @@ function clickField(Id)
 {
     document.formUpdate.reset();
     document.formUpdate.fieldId.value = Id;
-    var strHtml = '';
-    if ($('#' + Id + 'BaseLevel')[0])
-    {
-        $('#btnRemoveField').removeClass('hide');
-    }
-    else
-    {
-        strHtml += '<option value="">select alliance...</option>';
-        $('#btnRemoveField').addClass('hide');
-    }
+    var strHtml = '<option value="">select alliance...</option>';
     for (var key in objectAlliances)
     {
         strHtml += '<option value="' + objectAlliances[key.toString()].NameId + '">' + objectAlliances[key.toString()].Name + '</option>';
@@ -52,8 +43,14 @@ function clickField(Id)
     $('#alliance')[0].innerHTML = strHtml;
     if ($('#' + Id + 'BaseLevel')[0])
     {
+        $('#btnRemoveField').removeClass('hide');
         document.formUpdate.baseLevel.value = $('#' + Id + 'BaseLevel')[0].innerHTML;
         document.formUpdate.alliance.value = $('#' + Id + 'Alliance')[0].innerHTML.replace('&nbsp;', ' ');
+        changeAlliance();
+    }
+    else
+    {
+        $('#btnRemoveField').addClass('hide');
     }
     $('#divEditField').removeClass('hide');
 }
@@ -118,12 +115,17 @@ function updateUI()
                 }
             }
         }
-        for (var key in arrayFieldsFull)
-        {
-            updateFieldColor(arrayFieldsFull[key], arrayFieldsFull);
-        }
         console.log(arrayFields);
         console.log(arrayFieldsFull);
+        for (var y in arrayFields)
+        {
+            for (var x in arrayFields[y])
+            {
+                var field = arrayFields[y][x];
+                updateFieldColor(field, arrayFieldsFull);
+                console.log(field);
+            }
+        }
     }
     catch(e)
     {
@@ -170,5 +172,6 @@ function updateFieldColor(field, arrayFieldsFull)
     // Feld unbesetzt
     else
     {
+        // Achtung:logisches "Bug": Feld bleibt bei Löschung mit gleicher Färbung erhalten, da für diese Fälle noch keine implementierte Logik existiert
     }
 }
