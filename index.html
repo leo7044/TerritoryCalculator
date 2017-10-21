@@ -74,7 +74,32 @@
                 <div id="field36" class="col-xs-1 field"></div>
                 <div id="field37" class="col-xs-1 field"></div>
             </div>
-            <div id="divEditField" class="jumbotron">divEditField</div>
+            <div id="divEditField" class="jumbotron hide">
+                <form name="formUpdate" id="formUpdate" action="" onsubmit="return updateField(this.fieldId.value);">
+                    <input type="hidden" name="fieldId" id="fieldId" value="">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input class="form-control" name="baseLevel" id="baseLevel" placeholder="BaseLevel" pattern="[0-9]{1,2}" value="" required />
+                       </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <select class="form-control" name="alliance" id="alliance" placeholder="Alliance" value="" onchange="changeAlliance();" required></select>
+                        </div>
+                    </div>
+                    <button class="btn btn-danger" onclick="return cancelEdit();">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                    <button id="btnRemoveField" class="btn btn-warning hide" onclick="return removeField();">
+                        <span class="glyphicon glyphicon-minus"></span> Remove
+                    </button>
+                    <button type="submit" class="btn btn-primary pull-right">
+                        <span class="glyphicon glyphicon-refresh"></span> Update
+                    </button>
+                </form>
+            </div>
         </div>
     </body>
 </html>

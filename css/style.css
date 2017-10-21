@@ -26,6 +26,7 @@ div.box-content
 #divEditField
 {
     position: absolute;
+    max-width: 35%;
     right: 20px;
     top: 20px;
 }
@@ -33,9 +34,18 @@ div.box-content
 .field, .field-disabled
 {
     text-align: center;
-    padding-top: 26px;
     height: 80px;
     border: 1px solid black;
+}
+
+.field
+{
+    padding-top: 20px;
+}
+
+.field-disabled
+{
+    padding-top: 26px;
 }
 
 a
