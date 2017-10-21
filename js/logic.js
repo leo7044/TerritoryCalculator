@@ -106,19 +106,24 @@ function updateUI()
     try
     {
         var arrayFields = scanAllFieldsAsMatrix();
+        var arrayFieldsFull = new Array();
         for (var y in arrayFields)
         {
             for (var x in arrayFields[y])
             {
                 var field = arrayFields[y][x];
-                /* if (!$.isEmptyObject(field))
+                if (field.BaseLevel)
                 {
-                    console.log(field);
-                }*/
-                updateFieldColor(field, arrayFields);
+                    arrayFieldsFull.push(field);
+                }
             }
         }
+        for (var key in arrayFieldsFull)
+        {
+            updateFieldColor(arrayFieldsFull[key], arrayFieldsFull);
+        }
         console.log(arrayFields);
+        console.log(arrayFieldsFull);
     }
     catch(e)
     {
@@ -151,14 +156,19 @@ function scanAllFieldsAsMatrix()
 }
 
 // färbt ein Feld ein
-function updateFieldColor(field, arrayFields)
+function updateFieldColor(field, arrayFieldsFull)
 {
-    var x = field.x;
-    var y = field.y;
+    var curX = field.x;
+    var curY = field.y;
+    // baseLevel existiert -> direkt einfärben
     if (field.BaseLevel)
     {
-        var baseLevel = field.BaseLevel;
-        var alliance = field.Alliance;
-        $('#field' + y + x)[0].style.backgroundColor = objectAlliances[alliance.toString()].Color;
+        var curBaseLevel = field.BaseLevel;
+        var curAlliance = field.Alliance;
+        $('#field' + curY + curX)[0].style.backgroundColor = objectAlliances[curAlliance.toString()].Color;
+    }
+    // Feld unbesetzt
+    else
+    {
     }
 }
