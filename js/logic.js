@@ -1,25 +1,21 @@
 // global vars
-var arrayAlliances =
-[
-    ['Forgotten', 'Forgotten', 3.5, '#DDDD00'],
-    ['Alliance 1', 'Alliance&nbsp;1', 2.5, '#2222FF'],
-    ['Alliance 2', 'Alliance&nbsp;2', 2.5, '#22FF22'],
-    ['Alliance 3', 'Alliance&nbsp;3', 2.5, '#FF2222'],
-    ['Alliance 4', 'Alliance&nbsp;4', 2.5, '#22FFFF']
-];
+var objectAlliances = new Object();
 
 // on load of page
 $(document).ready(function(){
+    $.getJSON('js/objectAlliances.json', function(data){
+        objectAlliances = data;
+    });
     $('.field')
-        .mouseenter(function() {
-            focusField(this.id);
-        })
-        .mouseleave(function() {
-            defocusField(this.id);
-        })
-        .click(function(){
-            clickField(this.id);
-        });
+    .mouseenter(function() {
+        focusField(this.id);
+    })
+    .mouseleave(function() {
+        defocusField(this.id);
+    })
+    .click(function(){
+        clickField(this.id);
+    });
 });
 
 // mit der Maus ins Feld reinbewegen
@@ -49,9 +45,9 @@ function clickField(Id)
         strHtml += '<option value="">select alliance...</option>';
         $('#btnRemoveField').addClass('hide');
     }
-    for (var key in arrayAlliances)
+    for (var key in objectAlliances)
     {
-        strHtml += '<option value="' + arrayAlliances[key][0] + '">' + arrayAlliances[key][1] + '</option>';
+        strHtml += '<option value="' + objectAlliances[key.toString()].NameId + '">' + objectAlliances[key.toString()].Name + '</option>';
     }
     $('#alliance')[0].innerHTML = strHtml;
     if ($('#' + Id + 'BaseLevel')[0])
@@ -110,6 +106,18 @@ function updateUI()
     try
     {
         var arrayFields = scanAllFieldsAsMatrix();
+        for (var y in arrayFields)
+        {
+            for (var x in arrayFields[y])
+            {
+                var field = arrayFields[y][x];
+                /* if (!$.isEmptyObject(field))
+                {
+                    console.log(field);
+                }*/
+                updateFieldColor(field, arrayFields);
+            }
+        }
         console.log(arrayFields);
     }
     catch(e)
@@ -127,26 +135,30 @@ function scanAllFieldsAsMatrix()
         var arrayX = new Array();
         for (var x = 0; x < 7; x++)
         {
-            var arrayField = new Array();
+            var arrayField = new Object();
             if ($('#field' + y + x + 'BaseLevel')[0])
             {
-                arrayField[0] = $('#field' + y + x + 'BaseLevel')[0].innerHTML;
-                arrayField[1] = $('#field' + y + x  + 'Alliance')[0].innerHTML.replace('&nbsp;', ' ');
+                arrayField.BaseLevel = $('#field' + y + x + 'BaseLevel')[0].innerHTML;
+                arrayField.Alliance = $('#field' + y + x  + 'Alliance')[0].innerHTML.replace('&nbsp;', ' ');
             }
+            arrayField.x = x;
+            arrayField.y = y;
             arrayX.push(arrayField);
         }
         arrayFields.push(arrayX);
     }
-    /*for (var i = 0; i < $('.field').length; i++)
-    {
-        var arrayField = new Array();
-        if ($('.field')[i].innerHTML != '')
-        {
-            var iInc = parseInt(i) + 1;
-            arrayField[0] = $('#field' + iInc + 'BaseLevel')[0].innerHTML;
-            arrayField[1] = $('#field' + iInc + 'Alliance')[0].innerHTML.replace('&nbsp;', ' ');
-        }
-        arrayFields.push(arrayField);
-    }*/
     return arrayFields;
+}
+
+// färbt ein Feld ein
+function updateFieldColor(field, arrayFields)
+{
+    var x = field.x;
+    var y = field.y;
+    if (field.BaseLevel)
+    {
+        var baseLevel = field.BaseLevel;
+        var alliance = field.Alliance;
+        $('#field' + y + x)[0].style.backgroundColor = objectAlliances[alliance.toString()].Color;
+    }
 }

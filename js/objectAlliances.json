@@ -1,0 +1,37 @@
+{
+    "Forgotten":
+    {
+        "Name": "Forgotten",
+        "Name": "Forgotten",
+        "Range": 3.5,
+        "Color": "#DDDD00"
+    },
+    "Alliance 1":
+    {
+        "NameId": "Alliance 1",
+        "Name": "Alliance&nbsp;1",
+        "Range": 2.5,
+        "Color": "#8888FF"
+    },
+    "Alliance 2":
+    {
+        "NameId": "Alliance 2",
+        "Name": "Alliance&nbsp;2",
+        "Range": 2.5,
+        "Color": "#22FF22"
+    },
+    "Alliance 3":
+    {
+        "NameId": "Alliance 3",
+        "Name": "Alliance&nbsp;3",
+        "Range": 2.5,
+        "Color": "#FF2222"
+    },
+    "Alliance 4":
+    {
+        "NameId": "Alliance 4",
+        "Name": "Alliance&nbsp;4",
+        "Range": 2.5,
+        "Color": "#22FFFF"
+    }
+}
