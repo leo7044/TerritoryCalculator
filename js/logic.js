@@ -120,7 +120,10 @@ function updateUI()
             for (var x in arrayFields[y])
             {
                 var field = arrayFields[y][x];
-                updateFieldColor(field, arrayFieldsFull);
+                if ($('#field' + field.y + field.x)[0])
+                {
+                    updateFieldColor(field, arrayFieldsFull);
+                }
             }
         }
     }
@@ -159,6 +162,11 @@ function updateFieldColor(field, arrayFieldsFull)
 {
     var curX = field.x;
     var curY = field.y;
+    var sumForgotten = parseFloat(0);
+    var sumAlliance1 = parseFloat(0);
+    var sumAlliance2 = parseFloat(0);
+    var sumAlliance3 = parseFloat(0);
+    var sumAlliance4 = parseFloat(0);
     // baseLevel existiert -> direkt einfärben
     if (field.BaseLevel)
     {
@@ -169,6 +177,100 @@ function updateFieldColor(field, arrayFieldsFull)
     // Feld unbesetzt
     else
     {
-        // Achtung:logisches "Bug": Feld bleibt bei Löschung mit gleicher Färbung erhalten, da für diese Fälle noch keine implementierte Logik existiert
+        if (arrayFieldsFull.length != 0)
+        {
+            // Array enthält Einträge
+            for (var key in arrayFieldsFull)
+            {
+                var externField = arrayFieldsFull[key];
+                var externX = externField.x;
+                var externY = externField.y;
+                var externBaseLevel = externField.BaseLevel;
+                var externAlliance = externField.Alliance;
+                var externRange = objectAlliances[externAlliance].Range;
+                var differenceToExternField = Math.sqrt(Math.pow(externX - curX, 2) + Math.pow(externY - curY, 2));
+                if (differenceToExternField <= externRange)
+                {
+                    var fieldSumToExtern = parseFloat((parseFloat(externRange) - differenceToExternField) / parseFloat(externRange));
+                    var additionalSum = parseFloat(externBaseLevel) * fieldSumToExtern;
+                    switch (externAlliance)
+                    {
+                        case 'Forgotten':
+                        {
+                            sumForgotten += additionalSum;
+                            break;
+                        }
+                        case 'Alliance 1':
+                        {
+                            sumAlliance1 += additionalSum;
+                            break;
+                        }
+                        case 'Alliance 2':
+                        {
+                            sumAlliance2 += additionalSum;
+                            break;
+                        }
+                        case 'Alliance 3':
+                        {
+                            sumAlliance3 += additionalSum;
+                            break;
+                        }
+                        case 'Alliance 4':
+                        {
+                            sumAlliance4 += additionalSum;
+                            break;
+                        }
+                        default:
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            var maxSum = Math.max(sumForgotten, sumAlliance1, sumAlliance2, sumAlliance3, sumAlliance4);
+            if (maxSum)
+            {
+                switch (maxSum)
+                {
+                    case sumForgotten:
+                    {
+                        $('#field' + curY + curX)[0].style.backgroundColor = objectAlliances["Forgotten"].Color;
+                        break;
+                    }
+                    case sumAlliance1:
+                    {
+                        $('#field' + curY + curX)[0].style.backgroundColor = objectAlliances["Alliance 1"].Color;
+                        break;
+                    }
+                    case sumAlliance2:
+                    {
+                        $('#field' + curY + curX)[0].style.backgroundColor = objectAlliances["Alliance 2"].Color;
+                        break;
+                    }
+                    case sumAlliance3:
+                    {
+                        $('#field' + curY + curX)[0].style.backgroundColor = objectAlliances["Alliance 3"].Color;
+                        break;
+                    }
+                    case sumAlliance4:
+                    {
+                        $('#field' + curY + curX)[0].style.backgroundColor = objectAlliances["Alliance 4"].Color;
+                        break;
+                    }
+                    default:
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                $('#field' + curY + curX)[0].style.backgroundColor = '';
+            }
+        }
+        else
+        {
+            $('#field' + curY + curX)[0].style.backgroundColor = '';
+        }
     }
 }
