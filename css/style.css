@@ -1,28 +1,42 @@
+/* Developer: leo7044 */
+
 /* Optik div-Container-Header */
 div.box-header
 {
-	border:0px solid #888;
-	box-shadow:0px 2px 5px #ccc;
+	border:0px solid #888888;
+	box-shadow:0px 2px 5px #CCCCCC;
 	max-width:1113px;
 	padding:20px;
 	text-align:center;
+	position: relative;
+	cursor: pointer;
 }
 
 /* Optik div-Container-Content*/
 div.box-content
 {
-	border:1px solid #888;
-	box-shadow:0px 2px 5px #ccc;
+	border:1px solid #888888;
+	box-shadow:0px 2px 5px #CCCCCC;
 	max-width:1113px;
 	padding:20px;
 	background-color:#F8F8FF;
 }
 
+/* author-span platzieren in header */
+.author
+{
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+}
+
+/* 2 divs übereinander gelegt (Felder und editForm) */
 .parent
 {
     position: relative;
 }
 
+/* Platzierung des editForms */
 #divEditField
 {
     position: absolute;
@@ -31,24 +45,28 @@ div.box-content
     top: 20px;
 }
 
+/* Optik der Felder */
 .field, .field-disabled
 {
     text-align: center;
     height: 80px;
-    border: 1px solid black;
+    border: 1px solid #000000;
 }
 
+/* Beginn der Text-Höhe (2 Zeilen) */
 .field
 {
     padding-top: 20px;
 }
 
+/* Beginn der Text-Höhe (1 Zeile) */
 .field-disabled
 {
     padding-top: 26px;
 }
 
-a
+/* Text-Cursor unterdrücken */
+div
 {
-	cursor: pointer;
+	cursor: default;
 }

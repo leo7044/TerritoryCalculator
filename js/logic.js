@@ -1,3 +1,5 @@
+/* Developer: leo7044 */
+
 // global vars
 var objectAlliances = new Object();
 
@@ -228,6 +230,7 @@ function updateFieldColor(field, arrayFieldsFull)
                 }
             }
             var maxSum = Math.max(sumForgotten, sumAlliance1, sumAlliance2, sumAlliance3, sumAlliance4);
+            // finale Feldeinfärbung
             if (maxSum)
             {
                 switch (maxSum)
