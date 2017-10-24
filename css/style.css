@@ -20,6 +20,7 @@ div.box-content
 	max-width:1113px;
 	padding:20px;
 	background-color:#F8F8FF;
+	height: 650px;
 }
 
 /* author-span platzieren in header */
@@ -45,6 +46,7 @@ div.box-content
     top: 20px;
 }
 
+/* Platzierung des Hilfe-Containers (gleiche Stelle wie editForm) */
 #divHelp
 {
     position: absolute;
