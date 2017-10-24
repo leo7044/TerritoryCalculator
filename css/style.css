@@ -45,6 +45,14 @@ div.box-content
     top: 20px;
 }
 
+#divHelp
+{
+    position: absolute;
+    max-width: 35%;
+    right: 20px;
+    top: 20px;
+}
+
 /* Optik der Felder */
 .field, .field-disabled
 {

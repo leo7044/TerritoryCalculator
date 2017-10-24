@@ -13,10 +13,15 @@
 		<link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <div class="jumbotron center-block box-header" onclick="location.reload();">
+        <div class="jumbotron center-block box-header">
             <!-- <img src="img/logo.png" width="100px" height="100px" /></span> -->
-            <h2><span class="glyphicon glyphicon-picture"></span> Territory Calculator</h2>
-            <span class="author">&copy; leo7044</span>
+            <h2 onclick="location.reload();"><span class="glyphicon glyphicon-picture"></span> Territory Calculator</h2>
+            <span class="author">
+                <button class="btn btn-primary" onclick="showHelp();">
+                    <span class="glyphicon glyphicon-question-sign"></span> Help / FAQ
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&copy; leo7044
+            </span>
         </div>
         <div class="center-block box-content parent">
             <div class="row">
@@ -101,6 +106,16 @@
                         <span class="glyphicon glyphicon-refresh"></span> Update
                     </button>
                 </form>
+            </div>
+            <div id="divHelp" class="jumbotron hide">
+                <h2><span class="glyphicon glyphicon-question-sign"></span> Help / FAQ</h2>
+                This web application calculates the area influence on the world map.<br/>
+                <b>Target</b> is a coordinate (for example a POI) for which you want to calculate the influence of your bases on the territory.
+                You can for example calculate whether you can "steel" a POI from the forgotten or enemies.
+                <h2><span class="glyphicon glyphicon-question-sign"></span> Hilfe / FAQ</h2>
+                Diese Webanwendung berechnet den Gebietseinfluss auf der Weltkarte.<br/>
+                <b>Target</b> ist eine Koordinate (zum Beispiel ein POI) für den ihr den Einfluss eurer Basen auf das Gebiet berechnen wollt.
+                Ihr könnt zum Beispiel ausrechnen, ob ihr den POI von den Vergessenen oder eurer Feinde "stehlen" könnt.
             </div>
         </div>
     </body>

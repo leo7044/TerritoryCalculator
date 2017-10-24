@@ -20,6 +20,13 @@ $(document).ready(function(){
     });
 });
 
+// zeigt die Hilfe an
+function showHelp()
+{
+    $('#divEditField').addClass('hide');
+    $('#divHelp').toggleClass('hide');
+}
+
 // mit der Maus ins Feld reinbewegen
 function focusField(Id)
 {
@@ -54,6 +61,7 @@ function clickField(Id)
     {
         $('#btnRemoveField').addClass('hide');
     }
+    $('#divHelp').addClass('hide');
     $('#divEditField').removeClass('hide');
 }
 
