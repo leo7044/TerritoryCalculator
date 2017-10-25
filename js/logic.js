@@ -2,6 +2,7 @@
 
 // global vars
 var objectAlliances = new Object();
+var htmlObjectSelectAlliance = null;
 
 // on load of page
 $(document).ready(function(){
@@ -9,14 +10,8 @@ $(document).ready(function(){
         objectAlliances = data;
     });
     $('.field')
-    .mouseenter(function() {
-        focusField(this.id);
-    })
-    .mouseleave(function() {
-        defocusField(this.id);
-    })
     .click(function(){
-        clickField(this.id);
+        clickField(this);
     });
 });
 
@@ -25,31 +20,25 @@ function showHelp()
 {
     $('#divEditField').addClass('hide');
     $('#divHelp').toggleClass('hide');
-}
-
-// mit der Maus ins Feld reinbewegen
-function focusField(Id)
-{
-    $('#' + Id)[0].style.border = '3px solid black';
-}
-
-// mit der maus aus dem Feld rausbewegen
-function defocusField(Id)
-{
-    $('#' + Id)[0].style.border = '';
+	manageBoldBorders();
 }
 
 // auf ein Feldklicken
-function clickField(Id)
+function clickField(htmlObjectField)
 {
+	var Id = htmlObjectField.id;
     document.formUpdate.reset();
     document.formUpdate.fieldId.value = Id;
-    var strHtml = '<option value="">select alliance...</option>';
-    for (var key in objectAlliances)
-    {
-        strHtml += '<option value="' + objectAlliances[key.toString()].NameId + '">' + objectAlliances[key.toString()].Name + '</option>';
-    }
-    $('#alliance')[0].innerHTML = strHtml;
+	if (!htmlObjectSelectAlliance)
+	{
+		var strHtml = '<option value="">select alliance...</option>';
+		for (var key in objectAlliances)
+		{
+			strHtml += '<option value="' + objectAlliances[key.toString()].NameId + '">' + objectAlliances[key.toString()].Name + '</option>';
+		}
+		htmlObjectSelectAlliance = strHtml;
+	}
+	$('#alliance')[0].innerHTML = htmlObjectSelectAlliance;
     if ($('#' + Id + 'BaseLevel')[0])
     {
         $('#btnRemoveField').removeClass('hide');
@@ -63,6 +52,26 @@ function clickField(Id)
     }
     $('#divHelp').addClass('hide');
     $('#divEditField').removeClass('hide');
+	manageBoldBorders(htmlObjectField,);
+}
+
+// aktives Element wird angeklickt
+function manageBoldBorders(htmlObjectField,)
+{
+	for (var y = 0; y < 7; y++)
+	{
+		for (var x = 0; x < 7; x++)
+		{
+			if ($('#field' + y + x)[0])
+			{
+				$('#field' + y + x)[0].style.border = '';
+			}
+		}
+	}
+	if (htmlObjectField)
+	{
+		htmlObjectField.style.border = '3px solid #000000';
+	}
 }
 
 // wenn in formUpadte die alliance gewechselt wird
@@ -100,6 +109,7 @@ function removeField()
 function cancelEdit()
 {
     $('#divEditField').addClass('hide');
+	manageBoldBorders();
     return false;
 }
 

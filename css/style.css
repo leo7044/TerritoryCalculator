@@ -67,6 +67,14 @@ div.box-content
 {
     padding-top: 20px;
 }
+.field:hover
+{
+	border: 3px solid #000000;
+}
+.field:
+{
+	border: 3px solid #000000;
+}
 
 /* Beginn der Text-Höhe (1 Zeile) */
 .field-disabled
