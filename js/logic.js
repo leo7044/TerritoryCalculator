@@ -52,11 +52,11 @@ function clickField(htmlObjectField)
     }
     $('#divHelp').addClass('hide');
     $('#divEditField').removeClass('hide');
-	manageBoldBorders(htmlObjectField,);
+	manageBoldBorders(htmlObjectField);
 }
 
 // aktives Element wird angeklickt
-function manageBoldBorders(htmlObjectField,)
+function manageBoldBorders(htmlObjectField)
 {
 	for (var y = 0; y < 7; y++)
 	{
